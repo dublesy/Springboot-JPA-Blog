@@ -1,7 +1,13 @@
 package com.cos.blog.service;
 
 
+import org.eclipse.jdt.internal.compiler.batch.FileFinder;
+import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +26,33 @@ public class UserService {
 	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
+	
+	
+	@Transactional
+	public User find(String username) {		
+		User user = userRepository.findByUsername(username)
+				.orElseGet(()->{
+					return null;
+				});				
+		return user;
+	}
+	
+	@Transactional
+	public void update(User user) {
+		User persistance = userRepository.findById(user.getId())
+				.orElseThrow(()->{
+					return new IllegalArgumentException("회원을 찾을 수 없습니다.");
+				});
+		
+		//oAuth가 비어 있을 때만 패스워드, 이메일 수정 가능
+		if(persistance.getOauth() == null || persistance.getOauth().equals("")) {
+			String rawPassword = user.getPassword();
+			String encPassword = encoder.encode(rawPassword);
+			persistance.setPassword(encPassword);
+			persistance.setEmail(user.getEmail());
+		}
+		
+	}
 	
 	@Transactional
 	public int join(User user) {
