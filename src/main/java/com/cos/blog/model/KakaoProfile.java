@@ -1,5 +1,7 @@
 package com.cos.blog.model;
 
+import com.fasterxml.jackson.databind.util.ArrayBuilders.BooleanBuilder;
+
 import lombok.Data;
 
 @Data
@@ -31,6 +33,7 @@ public class KakaoProfile {
 			public String nickname;
 			public String thumbnail_image_url;
 			public String profile_image_url;
+			public Boolean is_default_image;
 		}
 	}
 }

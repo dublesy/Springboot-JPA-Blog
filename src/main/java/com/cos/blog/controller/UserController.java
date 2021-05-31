@@ -42,6 +42,8 @@ public class UserController {
 	private final static String KAKAO_REDIRECT_URI ="http://localhost:8000/blog/auth/kakao/callback";
 	private final static String KAKAO_REQUEST_TOKEN_URI="https://kauth.kakao.com/oauth/token";	
 	private final static String KAKAO_REQUEST_USER_INFO_URI="https://kapi.kakao.com/v2/user/me";
+		
+	
 	
 	@Autowired
 	private AuthenticationManager authenticationManager;
