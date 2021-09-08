@@ -72,6 +72,12 @@
 			<artifactId>spring-security-test</artifactId>
  			<scope>test</scope>
  		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 		
 		<!-- 시큐리티 태그 라이브러리 -->
  		<dependency>
