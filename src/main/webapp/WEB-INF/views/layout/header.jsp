@@ -42,6 +42,7 @@
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link" href="${contextPath}/board/saveForm">글쓰기</a></li>
 						<li class="nav-item"><a class="nav-link" href="${contextPath}/user/updateForm">회원정보</a></li>
+						<li class="nav-item"><a class="nav-link" href="${contextPath}/users">회원목록</a></li>
 						<li class="nav-item"><a class="nav-link" href="${contextPath}/logout">로그아웃</a></li>
 					</ul>
 				</c:otherwise>

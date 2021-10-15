@@ -1,7 +1,10 @@
 package com.cos.blog.repository;
 
+import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -13,7 +16,10 @@ import com.cos.blog.model.User;
 public interface UserRepository extends JpaRepository<User, Integer>{
 
 	Optional<User> findByUsername(String username);
-	
+
+	@Override
+	List<User> findAll();
+
 	//JPA Naming 쿼리 전략
 	// JAP에 의해 자동으로 select * from user where username = ?1 and password = ?2 인 쿼리가 자동으로 생성되어 동작함
 	//User findByUsernameAndPassword(String username, String password);

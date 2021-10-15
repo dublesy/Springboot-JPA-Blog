@@ -1,9 +1,12 @@
 package com.cos.blog.service;
 
 
+import com.cos.blog.model.Board;
 import org.eclipse.jdt.internal.compiler.batch.FileFinder;
 import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -67,8 +70,13 @@ public class UserService {
 		}
 		return -1;
 	}
-	
-	/*
+
+    public Page<User> findAll(Pageable pageable) {
+
+		return userRepository.findAll(pageable);
+    }
+
+    /*
 	 * @Transactional(readOnly = true) //Select 할 때 트랜잭션 시작, 서비스 종료시에 트랜잭션 종료(정합성)
 	 * public User login(User user) { return
 	 * userRepository.findByUsernameAndPassword(user.getUsername(),

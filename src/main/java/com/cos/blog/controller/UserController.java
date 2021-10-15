@@ -5,8 +5,13 @@ import java.util.UUID;
 
 import javax.servlet.ServletContext;
 
+import com.cos.blog.model.Board;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -17,6 +22,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,12 +75,27 @@ public class UserController {
 		if(principal != null) return "redirect:/";
 		return "user/loginForm";
 	}
-	
+
+	@GetMapping("/usersForm")
+	public String usersForm(){
+		System.out.println("요청 성공");
+		return "user/usersForm";
+	}
+
 	@GetMapping("/user/updateForm")
 	public String updateForm() {
 		System.out.println("요청 성공");
 		return "user/updateForm";
 	}
+
+	@GetMapping("/users")
+	public String index(Model model, @PageableDefault(size = 10, sort="id", direction = Sort.Direction.DESC ) Pageable pageable) {
+		Page<User> pagingUser = userService.findAll(pageable);
+		model.addAttribute("users", pagingUser);
+		return "user/users";
+	}
+
+
 	//data를 리턴해주는 컨트롤러 함수로 셋팅
 	@GetMapping("/auth/kakao/callback")
 	public String kakaoLoginCallback(String code) { 
