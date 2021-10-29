@@ -3,6 +3,7 @@ package com.cos.blog.service;
 
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +22,7 @@ import com.cos.blog.repository.UserRepository;
 
 //스프링 컴포넌트 스캔을 통해서 Bean에 등록을 해줌 IoC
 @Service
+@Slf4j
 public class BoardService {
 
 	@Autowired
@@ -51,6 +53,9 @@ public class BoardService {
 				.orElseThrow(()->{
 					return new IllegalArgumentException("댓글 작성 실패 : 게시글 아이디를 찾을 수 없습니다.");
 		});
+
+
+		log.info("resert test");
 		
 		reqReply.setUser(user);
 		reqReply.setBoard(board);		
