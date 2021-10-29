@@ -2,6 +2,7 @@ package com.cos.blog.service;
 
 
 import com.cos.blog.model.Board;
+import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jdt.internal.compiler.batch.FileFinder;
 import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import com.cos.blog.repository.UserRepository;
 
 //스프링 컴포넌트 스캔을 통해서 Bean에 등록을 해줌 IoC
 @Service
+@Slf4j
 public class UserService {
 
 	@Autowired
