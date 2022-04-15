@@ -58,8 +58,6 @@ public class BoardService {
 		log.info("resert test");
 
 		log.info("commit 2");
-
-		log.info("yamma");
 		
 		reqReply.setUser(user);
 		reqReply.setBoard(board);		
